@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/frameCraft.py
+src/frameCraftGFX.py
+src/frameCraftUI.py
+src/pygame_framecraft.egg-info/PKG-INFO
+src/pygame_framecraft.egg-info/SOURCES.txt
+src/pygame_framecraft.egg-info/dependency_links.txt
+src/pygame_framecraft.egg-info/requires.txt
+src/pygame_framecraft.egg-info/top_level.txt
