@@ -1,0 +1,147 @@
+# frameCraft
+
+A lightweight educational game framework built on a pygame-compatible API.
+
+**frameCraft** is designed for teaching and beginner-friendly game development. The same game code can run:
+
+- inside **CodeRoom** using its pygame-light host runtime
+- locally with standard **CPython + pygame**
+
+> frameCraft is an independent project built on top of pygame-compatible APIs. It is not affiliated with or maintained by the pygame project.
+
+## Installation
+
+Once published on PyPI:
+
+```bash
+pip install pygame-framecraft
+```
+
+The existing import remains intentionally unchanged:
+
+```python
+import frameCraft as fc
+```
+
+This preserves compatibility with existing CodeRoom content.
+
+## Minimal standalone example
+
+```python
+import frameCraft as fc
+
+fc.GAME(
+    "frameCraft Test",
+    window=(640, 400),
+    fps=60
+)
+
+fc.SCENE("main")
+
+@fc.SCENE_BUILD("main")
+def build(ctx):
+    fc.ENTITY("player", (320, 200), tag="player")
+    fc.RECT("player", 40, 40)
+
+fc.START()
+```
+
+## CodeRoom host integration
+
+CodeRoom keeps ownership of its existing game loop and calls:
+
+```python
+FC_BOOT(scene)
+FC_STEP(events, dt)
+FC_DRAW(screen)
+```
+
+The hosted API and the standalone API use the same frameCraft implementation.
+
+## Source layout
+
+Insert the three existing runtime files into `src/`:
+
+```text
+src/
+├── frameCraft.py
+├── frameCraftGFX.py
+└── frameCraftUI.py
+```
+
+Do **not** rename them for the first public version.
+
+Keeping the filenames unchanged has two advantages:
+
+1. Existing CodeRoom code using `import frameCraft as fc` remains compatible.
+2. The exact same source files can be copied into the CodeRoom deployment and packaged for PyPI.
+
+A future major version could introduce a conventional lowercase package layout if desired, but that should be treated as a separate compatibility decision.
+
+## Project layout
+
+```text
+pygame-framecraft/
+├── .github/
+│   └── workflows/
+├── src/
+│   ├── frameCraft.py
+│   ├── frameCraftGFX.py
+│   └── frameCraftUI.py
+├── examples/
+├── tests/
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── pyproject.toml
+└── .gitignore
+```
+
+## Build
+
+Install the build tool:
+
+```bash
+python -m pip install build
+```
+
+Build wheel and source distribution:
+
+```bash
+python -m build
+```
+
+The package configuration deliberately publishes the three existing modules from `src/` without requiring a source-code rename.
+
+## CodeRoom runtime artifact
+
+For CodeRoom deployments, the release workflow creates a small ZIP containing exactly:
+
+```text
+frameCraft.py
+frameCraftGFX.py
+frameCraftUI.py
+```
+
+This lets GitHub remain the development source of truth while CodeRoom can continue shipping the same three files under:
+
+```text
+jsEditor.App/scripts/python/
+```
+
+## Versioning
+
+Use semantic version tags:
+
+```text
+v0.1.0
+v0.2.0
+v1.0.0
+```
+
+CodeRoom should always reference a fixed release version rather than `main` or `latest`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
