@@ -1,5 +1,5 @@
 ﻿"""
-frameCraft
+frameCraft 
 
 A lightweight educational game framework using a pygame-compatible API.
 
