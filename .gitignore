@@ -3,14 +3,15 @@
 .venv-test/
 venv/
 
-# Python
+# Python cache
 __pycache__/
 *.py[cod]
 
-# Build artifacts
+# Packaging / build
 build/
 dist/
 *.egg-info/
+pygame_framecraft-*/
 
-# IDE
+# VS Code
 .vscode/
